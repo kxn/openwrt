@@ -581,6 +581,9 @@
 			reg = <0x00 0x1fac0000 0x00 0x10000>;
 			airoha,port-id = <0x00>;
 			airoha,scu-ssr = <0x22>;
+			airoha,scu = <0x1e>;
+			airoha,usb2-monitor-clk-sel = <0x01>;
+			airoha,serdes-port = <0x02>;
 
 			usb2-phy {
 				#phy-cells = <0x01>;
@@ -598,6 +601,9 @@
 			reg = <0x00 0x1fae0000 0x00 0x10000>;
 			airoha,port-id = <0x01>;
 			airoha,scu-ssr = <0x22>;
+			airoha,scu = <0x1e>;
+			airoha,usb2-monitor-clk-sel = <0x02>;
+			airoha,serdes-port = <0x03>;
 
 			usb2-phy {
 				#phy-cells = <0x01>;
