@@ -42,3 +42,17 @@ define Device/airoha_an7581-evb-emmc
   ARTIFACTS := preloader.bin bl31-uboot.fip
 endef
 TARGET_DEVICES += airoha_an7581-evb-emmc
+
+define Device/nokia_xg-040-md
+  $(call Device/FitImageLzma)
+  DEVICE_VENDOR := Nokia
+  DEVICE_MODEL := Bell XG-040G-MD
+  DEVICE_PACKAGES := kmod-leds-pwm kmod-i2c-an7581 kmod-pwm-airoha kmod-input-gpio-keys-polled
+  DEVICE_DTS := an7581-nokia-xg-040-md
+  DEVICE_DTS_CONFIG := config@1
+  IMAGE/sysupgrade.bin := append-kernel | pad-to 128k | append-rootfs | pad-rootfs | append-metadata
+  ARTIFACT/preloader.bin := an7581-preloader rfb
+  ARTIFACT/bl31-uboot.fip := an7581-bl31-uboot rfb
+  ARTIFACTS := preloader.bin bl31-uboot.fip
+endef
+TARGET_DEVICES += nokia_xg-040-md
