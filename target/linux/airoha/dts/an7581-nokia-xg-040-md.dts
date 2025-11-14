@@ -655,7 +655,7 @@
 
 					conf {
 						pins = "gpio2";
-						output-high;
+						output-enable;
 					};
 				};
 
@@ -682,7 +682,7 @@
 
 					mux {
 						function = "phy1_led0";
-						pins = "gpio33";
+						groups = "gpio33";
 					};
 				};
 
@@ -691,7 +691,7 @@
 
 					mux {
 						function = "phy2_led0";
-						pins = "gpio34";
+						groups = "gpio34";
 					};
 				};
 
@@ -700,7 +700,7 @@
 
 					mux {
 						function = "phy3_led0";
-						pins = "gpio35";
+						groups = "gpio35";
 					};
 				};
 
@@ -709,7 +709,7 @@
 
 					mux {
 						function = "phy4_led0";
-						pins = "gpio42";
+						groups = "gpio42";
 					};
 				};
 			};
