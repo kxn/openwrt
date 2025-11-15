@@ -14,7 +14,6 @@ USBINPUT_DIR?=input/misc
 define KernelPackage/usb-common
   TITLE:=USB common
   HIDDEN:=1
-  DEPENDS:=@(USB_SUPPORT||USB_GADGET_SUPPORT)
   KCONFIG:=CONFIG_USB_COMMON
   FILES:=$(LINUX_DIR)/drivers/usb/common/usb-common.ko
   AUTOLOAD:=$(call AutoLoad,20,usb-common,1)
@@ -25,7 +24,7 @@ $(eval $(call KernelPackage,usb-common))
 define KernelPackage/usb-core
   SUBMENU:=$(USB_MENU)
   TITLE:=Support for USB
-  DEPENDS:=@USB_SUPPORT +USB_SUPPORT:kmod-usb-common
+  DEPENDS:=+kmod-usb-common
   KCONFIG:=CONFIG_USB CONFIG_XPS_USB_HCD_XILINX=n CONFIG_USB_FHCI_HCD=n
   FILES:=$(LINUX_DIR)/drivers/usb/core/usbcore.ko
   AUTOLOAD:=$(call AutoLoad,20,usbcore,1)
@@ -1846,7 +1845,8 @@ define KernelPackage/usb3
 	+TARGET_bcm53xx:kmod-phy-bcm-ns-usb3 \
 	+TARGET_ramips_mt7621:kmod-usb-xhci-mtk \
 	+TARGET_econet_en751221:kmod-usb-xhci-mtk \
-	+TARGET_mediatek:kmod-usb-xhci-mtk
+	+TARGET_mediatek:kmod-usb-xhci-mtk \
+	+TARGET_airoha_an7581:kmod-usb-xhci-mtk
   KCONFIG:= \
 	CONFIG_USB_PCI=y \
 	CONFIG_USB_XHCI_PCI \
@@ -1964,4 +1964,3 @@ define KernelPackage/chaoskey/description
 endef
 
 $(eval $(call KernelPackage,chaoskey))
-
