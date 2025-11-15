@@ -19,7 +19,7 @@ endef
 define U-Boot/an7581_rfb
   NAME:=AN7581 Reference Board
   UBOOT_CONFIG:=an7581_evb
-  BUILD_DEVICES:=airoha_an7581-evb
+  BUILD_DEVICES:=airoha_an7581-evb nokia_xg-040-md
   BUILD_SUBTARGET:=an7581
   UBOOT_IMAGE:=u-boot.fip
   BL2_IMAGE:=an7581-bl2.bin

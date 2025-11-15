@@ -60,7 +60,7 @@ $(eval $(call KernelPackage,hci-uart))
 define KernelPackage/btusb
   SUBMENU:=$(BLUETOOTH_MENU)
   TITLE:=Bluetooth HCI USB support
-  DEPENDS:=@USB_SUPPORT +kmod-usb-core +kmod-bluetooth +kmod-btmtk
+  DEPENDS:=+kmod-usb-core +kmod-bluetooth +kmod-btmtk
   KCONFIG:= \
 	CONFIG_BT_HCIBTUSB \
 	CONFIG_BT_HCIBTUSB_BCM=n \
