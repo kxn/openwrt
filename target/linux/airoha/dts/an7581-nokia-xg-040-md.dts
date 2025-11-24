@@ -913,11 +913,6 @@
 				status = "okay";
 				phy-handle = <0x38>;
 				phy-mode = "2500base-x";
-
-				fixed-link {
-					speed = <0x9c4>;
-					full-duplex;
-				};
 			};
 		};
 
