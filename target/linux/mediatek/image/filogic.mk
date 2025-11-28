@@ -645,11 +645,7 @@ TARGET_DEVICES += bananapi_bpi-r4
 
 define Device/bananapi_bpi-r4-poe
   DEVICE_MODEL := BPi-R4 2.5GE
-ifneq ($(CONFIG_LINUX_6_6),)
-  DEVICE_DTS := mt7988a-bananapi-bpi-r4-poe
-else
   DEVICE_DTS := mt7988a-bananapi-bpi-r4-2g5
-endif
   DEVICE_DTS_CONFIG := config-mt7988a-bananapi-bpi-r4-poe
   $(call Device/bananapi_bpi-r4-common)
   DEVICE_PACKAGES += mt7988-2p5g-phy-firmware
@@ -668,9 +664,8 @@ define Device/bananapi_bpi-r4-lite
   DEVICE_DTC_FLAGS := --pad 4096
   DEVICE_DTS_DIR := ../dts
   DEVICE_DTS_LOADADDR := 0x4ff00000
-  DEVICE_PACKAGES := mt7987-2p5g-phy-firmware kmod-eeprom-at24 \
-		     kmod-gpio-pca953x kmod-i2c-mux-pca954x kmod-rtc-pcf8563 \
-		     kmod-sfp e2fsprogs mkf2fs
+  DEVICE_PACKAGES := kmod-eeprom-at24 kmod-gpio-pca953x kmod-i2c-mux-pca954x \
+		     kmod-rtc-pcf8563 kmod-sfp kmod-usb3 e2fsprogs mkf2fs mt7987-2p5g-phy-firmware
   BLOCKSIZE := 128k
   PAGESIZE := 2048
   KERNEL_IN_UBI := 1
