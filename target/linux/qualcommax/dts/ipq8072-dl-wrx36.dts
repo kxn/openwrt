@@ -84,14 +84,6 @@
 	status = "okay";
 };
 
-&cryptobam {
-	status = "okay";
-};
-
-&crypto {
-	status = "okay";
-};
-
 &qpic_bam {
 	status = "okay";
 };
@@ -165,6 +157,8 @@
 };
 
 &usb_0 {
+	dr_mode = "host";
+
 	status = "okay";
 };
 

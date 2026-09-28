@@ -359,7 +359,6 @@ static irqreturn_t button_handle_irq(int irq, void *_bdata)
 	return IRQ_HANDLED;
 }
 
-#ifdef CONFIG_OF
 static struct gpio_keys_platform_data *
 gpio_keys_get_devtree_pdata(struct device *dev)
 {
@@ -381,8 +380,7 @@ gpio_keys_get_devtree_pdata(struct device *dev)
 		int irq;
 
 		if (fwnode_property_read_u32(pp, "linux,code", &button->code)) {
-			dev_err(dev, "Button node '%s' without keycode\n",
-				fwnode_get_name(pp));
+			dev_err(dev, "Button node '%pfwP' without keycode\n", pp);
 			return ERR_PTR(-EINVAL);
 		}
 
@@ -429,15 +427,6 @@ static const struct of_device_id gpio_keys_polled_of_match[] = {
 	{ },
 };
 MODULE_DEVICE_TABLE(of, gpio_keys_polled_of_match);
-
-#else
-
-static inline struct gpio_keys_platform_data *
-gpio_keys_get_devtree_pdata(struct device *dev)
-{
-	return NULL;
-}
-#endif
 
 static int gpio_keys_button_probe(struct platform_device *pdev,
 		struct gpio_keys_button_dev **_bdev, int polled)
@@ -506,6 +495,7 @@ static int gpio_keys_button_probe(struct platform_device *pdev,
 			goto out;
 		}
 
+#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 18, 0) || IS_ENABLED(CONFIG_GPIOLIB_LEGACY)
 		if (gpio_is_valid(button->gpio)) {
 			/* legacy platform data... but is it the lookup table? */
 			bdata->gpiod = devm_gpiod_get_index(dev, desc, i,
@@ -525,7 +515,9 @@ static int gpio_keys_button_probe(struct platform_device *pdev,
 				if (button->active_low ^ gpiod_is_active_low(bdata->gpiod))
 					gpiod_toggle_active_low(bdata->gpiod);
 			}
-		} else {
+		} else
+#endif
+		{
 			/* Device-tree */
 			struct fwnode_handle *child =
 				device_get_next_child_node(dev, prev);

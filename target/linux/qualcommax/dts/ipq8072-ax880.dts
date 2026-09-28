@@ -236,14 +236,6 @@
 	status = "okay";
 };
 
-&crypto {
-	status = "okay";
-};
-
-&cryptobam {
-	status = "okay";
-};
-
 &prng {
 	status = "okay";
 };
@@ -261,6 +253,8 @@
 };
 
 &usb_0 {
+	dr_mode = "host";
+
 	status = "okay";
 };
 
